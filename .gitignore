@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.db
+*.db-journal
+
+# Node
+node_modules/
+.pnpm-store/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Build
+.next/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Puku/AI
+.puku/
+
+# Local databases
+*.db
+comparison.db
+comparison_bengali.db
+fb_posts.db
+
+# Large data folders (local only)
+fb_extracted/
+medium_extracted/
+fb_posts/
+medium-export.zip
+medium-export/
