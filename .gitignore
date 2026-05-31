@@ -4,8 +4,8 @@ __pycache__/
 *.pyo
 *.pyd
 .Python
-*.db
 *.db-journal
+# Note: *.db is ignored in root but SQLite/*.db is allowed below
 
 # Node
 node_modules/
@@ -38,15 +38,12 @@ Thumbs.db
 # Puku/AI
 .puku/
 
-# Local databases
-*.db
-comparison.db
-comparison_bengali.db
-fb_posts.db
-
 # Large data folders (local only)
 fb_extracted/
 medium_extracted/
 fb_posts/
 medium-export.zip
 medium-export/
+
+# SQLite folder - allow .db files in this subfolder to be tracked
+!SQLite/*.db
