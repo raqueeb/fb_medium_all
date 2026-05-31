@@ -22,6 +22,7 @@ fb_medium/
 |-- fb_to_medium_ghpages/          # GitHub Pages web application (embedded git repo)
 |-- fb_medium_app/                 # Legacy Streamlit desktop application
 |-- fb_medium_sql/                 # Next.js + Turso serverless version
+|-- SQLite/                        # SQLite databases (ready to use)
 |
 |-- fb_med.py                      # Facebook JSON parser
 |-- extract_fb_posts.py           # Facebook data extraction
@@ -304,6 +305,84 @@ Compares Facebook posts with Medium posts to find duplicates.
 | `save_bengali_results.py` | Save Bengali analysis results |
 | `show_matches.py` | Display post matches |
 | `test_*.py` | Various test scripts |
+
+---
+
+## SQLite Databases
+
+**Location:** `SQLite/`
+**Purpose:** Pre-built databases for instant use without running extraction scripts
+
+### Included Databases
+
+| Database | Size | Description |
+|----------|------|-------------|
+| `fb_posts.db` | ~10.3 MB | Main Facebook posts with full content, categories, languages |
+| `medium_posts.db` | ~1.5 MB | Medium posts scraped via RSS/API |
+| `comparison.db` | ~10.1 MB | Full comparison results (FB vs Medium) |
+| `comparison_bengali.db` | ~8.2 MB | Bengali-specific comparison results |
+| `social_posts.db` | 12 KB | Legacy simple posts database |
+| `social_posts_fb_app.db` | 12 KB | Copy from fb_medium_app folder |
+
+### Quick Start
+
+1. Clone the repository:
+```bash
+git clone https://github.com/raqueeb/fb_medium_all.git
+cd fb_medium_all
+```
+
+2. Run the Streamlit app:
+```bash
+cd fb_medium_app
+streamlit run app.py
+```
+
+The app will automatically find and use the SQLite databases in the `SQLite/` folder.
+
+### Database Schema
+
+**fb_posts.db**
+```sql
+CREATE TABLE posts (
+    id INTEGER PRIMARY KEY,
+    post_id TEXT UNIQUE,
+    text TEXT,
+    created_at TIMESTAMP,
+    category TEXT,
+    language TEXT,
+    posted BOOLEAN DEFAULT 0,
+    posted_at TIMESTAMP,
+    medium_url TEXT
+);
+```
+
+**medium_posts.db**
+```sql
+CREATE TABLE medium_posts (
+    id INTEGER PRIMARY KEY,
+    post_id TEXT UNIQUE,
+    title TEXT,
+    content TEXT,
+    published_at TIMESTAMP,
+    url TEXT
+);
+```
+
+### Recreating from Scratch
+
+If you need to regenerate the databases:
+
+```bash
+# Parse Facebook export to fb_posts.db
+python fb_med.py --path your_facebook_activity/posts/your_posts.json
+
+# Scrape Medium posts to medium_posts.db
+python scrape_medium.py
+
+# Compare posts and create comparison.db
+python compare_posts.py
+```
 
 ---
 
