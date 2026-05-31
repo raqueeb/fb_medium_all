@@ -23,6 +23,7 @@ fb_medium/
 |-- fb_medium_app/                 # Legacy Streamlit desktop application
 |-- fb_medium_sql/                 # Next.js + Turso serverless version
 |-- SQLite/                        # SQLite databases (ready to use)
+|-- github-switcher/               # GitHub account switcher scripts
 |
 |-- fb_med.py                      # Facebook JSON parser
 |-- extract_fb_posts.py           # Facebook data extraction
@@ -400,27 +401,59 @@ python compare_posts.py
 
 ---
 
-## Git Workflow
+## GitHub Account Switcher
 
-### Using the Switcher Script
+A portable GitHub account switcher is included in this repository for easy setup on new computers.
 
-A PowerShell script is provided to switch between GitHub accounts:
+### Location
+
+`github-switcher/` folder contains:
+- `switch.ps1` - PowerShell script to switch between accounts
+- `README.md` - Full documentation
+
+### Quick Setup on New PC
+
+1. Clone this repository:
+```bash
+git clone https://github.com/raqueeb/fb_medium_all.git
+cd fb_medium_all/github-switcher
+```
+
+2. Generate SSH keys for both accounts:
+```powershell
+ssh-keygen -t ed25519 -C "your_email@example.com"
+# Save as: id_ed25519_aiwithr
+
+ssh-keygen -t ed25519 -C "your_email@example.com"
+# Save as: id_ed25519_raqueeb
+```
+
+3. Add public keys to GitHub accounts
+
+4. Run the switcher:
+```powershell
+.\switch.ps1 aiwithr   # or .\switch.ps1 raqueeb
+```
+
+### Usage
 
 ```powershell
-.\switch.ps1           # Shows current account
+.\switch.ps1           # Show current account
 .\switch.ps1 aiwithr   # Switch to aiwithr
 .\switch.ps1 raqueeb   # Switch to raqueeb
 ```
 
-### Cloning Repositories
+### Cloning with Specific Account
 
 ```bash
-# Clone with aiwithr (default)
-git clone git@github.com:aiwithr/fb_medium.git
-
-# Clone with raqueeb
+# Use default account (whatever is currently active)
 git clone git@github.com:raqueeb/fb_medium_all.git
+
+# Force specific account
+git clone git@raqueeb.github.com:raqueeb/fb_medium_all.git
 ```
+
+Note: Private SSH keys are NOT included - generate your own.
 
 ---
 
